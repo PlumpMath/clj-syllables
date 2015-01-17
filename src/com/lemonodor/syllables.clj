@@ -34,17 +34,16 @@
                 (line-seq rdr)))))))
 
 
-(def default-syllables-db (atom nil))
+(def default-syllables-db
+  (memoize
+   (fn []
+     (edn/read-string
+      (slurp (io/resource "com/lemonodor/syllables/syllables.db"))))))
 
 
 (defn count-syllables
   ([word]
-   (when-not @default-syllables-db
-     (swap! default-syllables-db
-            (fn [_]
-              (edn/read-string
-               (slurp (io/resource "com/lemonodor/syllables/syllables.db"))))))
-   (count-syllables @default-syllables-db word))
+   (count-syllables (default-syllables-db) word))
   ([sdb word]
    (sdb (string/lower-case word))))
 
