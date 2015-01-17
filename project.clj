@@ -1,4 +1,4 @@
-(defproject com.lemonodor/syllables "0.1.1-SNAPSHOT"
+(defproject com.lemonodor/syllables "0.1.1"
   :description "Clojure library for counting syllables in words."
   :url "https://github.com/wiseman/clj-syllables"
   :license {:name "MIT License"
